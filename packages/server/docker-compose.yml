@@ -24,7 +24,7 @@ services:
       target: dev
     volumes:
       - .:/usr/src
-    command: npm run dev2
+    command: npm run dev
     # restart: always
     ports:
       - 3333:3333
