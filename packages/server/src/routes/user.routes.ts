@@ -59,11 +59,16 @@ userRoutes.post(
 userRoutes.get('/:id', async (request, response) => {
   const { id } = request.params
   try {
-    let user = await prisma.user.findUnique({ where: { id } })
-    if (!user) throw { email: 'user not found' }
-    response.json(user)
+    let getUser: Object | null = await prisma.user.findFirst({
+      where: { id },
+      include: { tasks: true }
+    })
+
+    if (!getUser) throw { user: 'user not found' }
+
+    response.json(getUser)
   } catch (error) {
-    response.status(404).json({ error: 'user not found' })
+    response.status(404).json(error)
   }
 })
 
