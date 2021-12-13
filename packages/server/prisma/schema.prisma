@@ -1,15 +1,23 @@
-datasource db {
-  provider = "postgresql"
-  url = env("DATABASE_URL")
-}
-
 generator client {
   provider = "prisma-client-js"
 }
 
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    String @id
+  name  String
+  email String @unique
+}
+
 model Tasks {
-  id String @id
-  title String
-  checked Boolean
-  created_at DateTime
+  id         String    @id
+  title      String
+  checked    Boolean   @default(false)
+  created_at DateTime? @default(now())
+  updated_at DateTime? @updatedAt
+  userId     String?
 }
