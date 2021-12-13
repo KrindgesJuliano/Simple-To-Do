@@ -11,6 +11,8 @@ services:
       - POSTGRES_USER=docker
       - POSTGRES_PASSWORD=power5
       - POSTGRES_DB=dbTodo
+      - POSTGRES_HOST_AUTH_METHOD=scram-sha-256
+      - POSTGRES_INITDB_ARGS=--auth-host=scram-sha-256
     volumes:
       - pgdata:/data/postgres
 
