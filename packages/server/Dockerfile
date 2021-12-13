@@ -1,22 +1,24 @@
-FROM node:16-slim as BUILDER
+FROM node:16-alpine as base
 
 
-WORKDIR /usr/app
+WORKDIR /usr/src
 
-COPY package*.json ./
-RUN npm install
-RUN npm install --save typescript ts-node ts-node-dev
-
-COPY src ./src
-
-FROM node:16-alpine
-
-ARG NODE_ENV
-
-WORKDIR /usr/app
-
-COPY --from=BUILDER /usr/app ./
-
+COPY package*.json /
 EXPOSE 3333
+
+
+FROM base as production
+ENV NODE_ENV="production"
+RUN npm ci
+COPY . /
+CMD [ "node", "bin/www" ]
+
+
+FROM base as dev
+ENV NODE_ENV="development"
+RUN npm install -g nodemon typescript ts-node && npm install
+COPY . /
+
+CMD [ "nodemon", "src/server.ts" ]
 
 

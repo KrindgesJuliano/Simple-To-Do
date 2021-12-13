@@ -4,8 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn  src/server.ts",
-    "dev2": "ts-node-dev --poll --respawn --transpile-only ./src/server.ts"
+    "build": "tsc",
+    "dev": "ts-node-dev --respawn  --inspect --transpile-only --exit-child --watch src src/server.ts",
+    "dev2": "ts-node-dev --poll --respawn  ./src/server.ts",
+    "dev3": "nodemon --legacy-watch --watch 'src/*.ts' --exec 'ts-node' src/server.ts"
   },
   "dependencies": {
     "express": "^4.17.1",
