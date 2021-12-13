@@ -1,16 +1,22 @@
-FROM node
+FROM node:16-slim as BUILDER
 
 
-WORKDIR /usr/src/app
+WORKDIR /usr/app
 
-COPY package.json ./
-
+COPY package*.json ./
 RUN npm install
 RUN npm install --save typescript ts-node ts-node-dev
 
-COPY . .
+COPY src ./src
+
+FROM node:16-alpine
+
+ARG NODE_ENV
+
+WORKDIR /usr/app
+
+COPY --from=BUILDER /usr/app ./
 
 EXPOSE 3333
 
 
-CMD [ "npm", "run", "dev" ]
