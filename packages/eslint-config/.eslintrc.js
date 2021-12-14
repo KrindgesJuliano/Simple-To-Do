@@ -1,13 +1,13 @@
 module.exports = {
   env: {
     browser: true,
-    es2020: true,
+    es2021: true,
     node: true,
     jest: true
   },
   extends: [
     'plugin:react/recommended',
-    'standard',
+    'airbnb',
     'plugin:@typescript-eslint/recommended',
     'prettier/@typescript-eslint',
     'prettier/standard',
@@ -18,7 +18,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true
     },
-    ecmaVersion: 11,
+    ecmaVersion: 12,
     sourceType: 'module'
   },
   plugins: ['react', '@typescript-eslint', 'prettier'],
