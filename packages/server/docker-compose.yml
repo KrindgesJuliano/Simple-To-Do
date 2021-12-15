@@ -4,7 +4,7 @@ services:
   database_todo:
     image: postgres
     container_name: database_todo
-    # restart: always
+    restart: always
     ports:
       - 5432:5432
     environment:

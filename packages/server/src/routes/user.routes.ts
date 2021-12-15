@@ -24,6 +24,7 @@ const simpleValidationResult = validationResult.withDefaults({
 })
 
 const checkForErrors = (request, response, next) => {
+  // TODO: add types to params
   const errors = simpleValidationResult(request)
   if (!errors.isEmpty()) {
     return response.status(400).json(errors.mapped())
@@ -36,6 +37,8 @@ userRoutes.post(
   userValidationRules,
   checkForErrors,
   async (request, response) => {
+    // TODO: add types to params
+
     const { name, email } = request.body
     try {
       const exitingUser = await prisma.user.findUnique({ where: { email } })
@@ -65,7 +68,7 @@ userRoutes.get('/:id', async (request, response) => {
     })
 
     if (!getUser) throw { user: 'user not found' }
-
+    // TODO: melhorar error handler
     response.json(getUser)
   } catch (error) {
     response.status(404).json(error)

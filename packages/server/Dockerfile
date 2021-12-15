@@ -1,9 +1,10 @@
 FROM node:16-alpine as base
 
 
-WORKDIR /usr/src
+WORKDIR "/app"
 
 COPY package*.json /
+COPY prisma ./prisma/
 EXPOSE 3333
 
 
@@ -19,6 +20,9 @@ ENV NODE_ENV="development"
 RUN npm install -g nodemon typescript ts-node && npm install
 COPY . /
 
-CMD [ "nodemon", "src/server.ts" ]
+# RUN npx prisma db push
+RUN npx prisma generate
+
+CMD [ "yarn", "dev" ]
 
 
