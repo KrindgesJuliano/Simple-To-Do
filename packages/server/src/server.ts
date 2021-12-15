@@ -1,14 +1,12 @@
 import express from 'express'
-import { tasksRoutes } from './routes/task.routes'
+import { router } from './routes'
+import cors from 'cors'
 
 const app = express()
 
+app.use(cors())
 app.use(express.json())
 
-app.get('/', (request, response) => {
-  return response.json({ message: 'hello world' })
-})
+app.use(router)
 
-app.use('/tasks', tasksRoutes)
-
-app.listen(3333, () => console.log('server is running!'))
+app.listen(3333, () => console.log('Server running at http://localhost:3333'))
