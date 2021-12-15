@@ -69,7 +69,7 @@ tasksRoutes.get('/:id', async (request, response) => {
   const { id } = request.params
   try {
     const findTask = await prisma.tasks.findUnique({ where: { id } })
-    if (!findTask) throw { error: 'task not found' }
+    if (!findTask) throw new Error('task not found')
     response.json(findTask)
   } catch (error) {
     return response.status(400).json(error)
@@ -84,7 +84,7 @@ tasksRoutes.put(
     const { id, title, checked } = request.body
     try {
       const task = await prisma.tasks.findUnique({ where: { id } })
-      if (!task) throw { error: 'task not found' }
+      if (!task) throw new Error('task not found')
 
       const taskUpdate = await prisma.tasks.update({
         where: {

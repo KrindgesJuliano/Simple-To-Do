@@ -1,3 +1,4 @@
+/* eslint-disable no-throw-literal */
 import { Router } from 'express'
 import { PrismaClient } from '@prisma/client'
 import { v4 as uuidv4 } from 'uuid'
@@ -50,7 +51,6 @@ userRoutes.post(
 
       response.status(201).json(user)
     } catch (error) {
-      console.log(error)
       return response.status(400).json(error)
     }
   }
@@ -59,7 +59,7 @@ userRoutes.post(
 userRoutes.get('/:id', async (request, response) => {
   const { id } = request.params
   try {
-    let getUser: Object | null = await prisma.user.findFirst({
+    const getUser: object | null = await prisma.user.findFirst({
       where: { id },
       include: { tasks: true }
     })
