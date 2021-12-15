@@ -42,7 +42,7 @@ cd packages/server
 docker-compose up -d
 ```
 ### Variaveis de ambiente
-- renomeo o arquivo .env.example para .env
+- renomei o arquivo .env.example dentre de packages/server para .env
 - mude as informações entre <> para postgresql://docker:power5@localhost:5432/dbTodo?schema=public
 ### Iniciar o server
 
