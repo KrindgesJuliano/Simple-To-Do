@@ -59,6 +59,7 @@ docker-compose up -d
 
 ### Ir para diretorio do frontend e iniciar o app
 
+abra novo terminal e digite:
 ```
 cd ../../packages/web
 ```
