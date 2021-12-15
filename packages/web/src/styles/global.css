@@ -14,3 +14,10 @@ button {
     Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif,
     Arial, Helvetica, sans-serif;
 }
+
+input:checked + div {
+  @apply border-green-500;
+}
+input:checked + div svg {
+  @apply block;
+}
