@@ -33,7 +33,7 @@
 ### Ir para o diretorio do server 
 
 ```bash
-cd /packages/server
+cd packages/server
 
 ```
 
