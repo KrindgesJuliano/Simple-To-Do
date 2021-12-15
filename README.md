@@ -6,9 +6,15 @@
 
 **Client:**
 
-- Next.js
-- Storybook
+- React
+- React-router-dom
 - TailwindCSS
+
+**Server:**
+
+- Express
+- Prisma ORM
+- postgres
 
 ## Rodar Localmente
 
