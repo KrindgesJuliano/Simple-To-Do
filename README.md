@@ -30,12 +30,16 @@
   yarn install
 ```
 
-### Ir para o diretorio do server e iniciar Docker Postgres
+### Ir para o diretorio do server 
 
 ```bash
 cd /packages/server
 
- docker-compose up -d
+```
+
+### Iniciar Docker Postgres
+```
+docker-compose up -d
 ```
 
 ### Iniciar o server
@@ -49,6 +53,10 @@ cd /packages/server
 
 ```
 cd ../../packages/web
+```
 
+### Iniciar o App frontend
+
+```
 yarn dev
 ```
