@@ -9,7 +9,7 @@ const tasksRoutes = Router()
 
 const taskValidationRules = [
   body('title').isLength({ min: 1 }).withMessage('title must not be empty'),
-  body('userId').isLength({ min: 1 }).withMessage('Name must not be empty')
+  body('userId').isLength({ min: 1 }).withMessage('userId must not be empty')
 ]
 
 const simpleValidationResult = validationResult.withDefaults({
@@ -54,7 +54,10 @@ tasksRoutes.post(
 tasksRoutes.get('/:userId', async (request, response) => {
   const { userId } = request.params
   try {
-    const tasksList = await prisma.tasks.findMany({ where: { userId } })
+    const tasksList = await prisma.tasks.findMany({
+      where: { userId },
+      orderBy: [{ created_at: 'desc' }]
+    })
     response.json(tasksList)
   } catch (error) {
     console.log(error)
@@ -65,8 +68,8 @@ tasksRoutes.get('/:userId', async (request, response) => {
 tasksRoutes.get('/:id', async (request, response) => {
   const { id } = request.params
   try {
-    let findTask = await prisma.tasks.findUnique({ where: { id } })
-    if (!findTask) throw { task: 'task not found' }
+    const findTask = await prisma.tasks.findUnique({ where: { id } })
+    if (!findTask) throw { error: 'task not found' }
     response.json(findTask)
   } catch (error) {
     return response.status(400).json(error)
@@ -80,7 +83,7 @@ tasksRoutes.put(
   async (request: Request, response: Response) => {
     const { id, title, checked } = request.body
     try {
-      let task = await prisma.tasks.findUnique({ where: { id } })
+      const task = await prisma.tasks.findUnique({ where: { id } })
       if (!task) throw { error: 'task not found' }
 
       const taskUpdate = await prisma.tasks.update({
