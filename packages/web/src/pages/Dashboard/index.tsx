@@ -1,6 +1,6 @@
 import { FormEvent, ReactElement, useEffect, useState } from 'react'
 import { BsPlusCircleFill } from 'react-icons/bs'
-import Task from '../../components/Task/ReadOnlyTask'
+import Task from '../../components/Task/Task'
 import { api } from '../../services/api'
 
 interface Task {

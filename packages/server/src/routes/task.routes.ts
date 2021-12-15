@@ -107,7 +107,7 @@ tasksRoutes.delete('/:id', async (request, response) => {
   const { id } = request.params
   try {
     const task = await prisma.tasks.delete({ where: { id } })
-    response.json({ message: 'user deleted' })
+    response.status(202).json({ message: 'task deleted' })
   } catch (error) {
     response.status(404).json({ error: 'user not found' })
   }

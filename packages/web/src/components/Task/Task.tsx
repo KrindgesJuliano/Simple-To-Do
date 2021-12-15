@@ -61,6 +61,10 @@ export default function Task({ id, title, checked }: Props): ReactElement {
     })
   }
 
+  function handleDeleteTask() {
+    api.delete(`/tasks/${id}`).then(response => console.log(response))
+  }
+
   useEffect(() => {
     setNewTitle(title)
     setIsChecked(checked)
@@ -108,7 +112,11 @@ export default function Task({ id, title, checked }: Props): ReactElement {
         {isEditable ? EditeInput() : <p className="py-1 w-auto">{newTitle}</p>}
       </div>
       <div className="hover:bg-slate-300 group px-3">
-        <button className="h-full w-full">
+        <button
+          type="button"
+          className="h-full w-full"
+          onClick={handleDeleteTask}
+        >
           <FiTrash2
             size={22}
             className="group-hover:text-red-600 text-red-400"

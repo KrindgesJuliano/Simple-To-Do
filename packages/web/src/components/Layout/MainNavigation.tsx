@@ -1,11 +1,10 @@
 import { ReactElement } from 'react'
 import { NavLink } from 'react-router-dom'
 
+// eslint-disable-next-line import/no-absolute-path
 import logo from '/logo.png'
 
-interface Props {}
-
-export var MainNavigation = function ({}: Props): ReactElement {
+export const MainNavigation = function (): ReactElement {
   return (
     <header className="border-b-[5px] border-red-800">
       <div className="container mx-auto py-4 flex justify-between">
