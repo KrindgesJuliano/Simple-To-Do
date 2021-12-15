@@ -35,7 +35,7 @@ export function Dashboard(): ReactElement {
 
   return (
     <div className="container mx-auto py-10 lg:max-w-5xl">
-      <div className="w-2/3 mx-auto">
+      <div className="sm:w-2/3 mx-auto p-2">
         <form
           onSubmit={handleCreateNewTask}
           id="enterTask"

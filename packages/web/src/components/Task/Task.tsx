@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 import { FormEvent, ReactElement, useEffect, useState } from 'react'
 import { FiCheck, FiTrash2, FiEdit3 } from 'react-icons/fi'
 import { AiOutlineClose } from 'react-icons/ai'
@@ -98,7 +99,7 @@ export default function Task({ id, title, checked }: Props): ReactElement {
   return (
     <div
       onDoubleClick={handleEditField}
-      className="flex justify-between border-[1px] border-slate-300 m-1 rounded h-10"
+      className="flex justify-between border-[1px] border-slate-300 m-1 rounded h-auto sm:h-10"
     >
       <div className="flex items-center gap-2 w-[97%] pl-3 ">
         <input
@@ -114,18 +115,21 @@ export default function Task({ id, title, checked }: Props): ReactElement {
 
         {isEditable ? EditeInput() : <p className="py-1 w-auto">{newTitle}</p>}
       </div>
-      <div className="hover:bg-slate-300 group px-3">
-        <button
-          type="button"
-          className="h-full w-full"
-          onClick={handleEditField}
-        >
-          <FiEdit3
-            size={22}
-            className="group-hover:text-blue-600 text-blue-400"
-          />
-        </button>
-      </div>
+      {!isEditable ? (
+        <div className="hover:bg-slate-300 group px-3">
+          <button
+            type="button"
+            className="h-full w-full"
+            onClick={handleEditField}
+          >
+            <FiEdit3
+              size={22}
+              className="group-hover:text-blue-600 text-blue-400"
+            />
+          </button>
+        </div>
+      ) : null}
+
       <div className="hover:bg-slate-300 group px-3">
         <button
           type="button"

@@ -19,9 +19,13 @@ export const MainNavigation = function (): ReactElement {
     <header className="border-b-[5px] border-red-800">
       <div className="container mx-auto py-4 flex justify-between">
         <NavLink to="/">
-          <img src={logo} alt="logo eletromoveis martinello" className="" />
+          <img
+            src={logo}
+            alt="logo eletromoveis martinello"
+            className="w-24 sm:w-52"
+          />
         </NavLink>
-        <nav className="flex justify-between gap-3 self-end">
+        <nav className="flex justify-between gap-3 self-end mr-2">
           {auth.email ? (
             <>
               <NavLink to="/todo">Todo</NavLink>
@@ -29,7 +33,6 @@ export const MainNavigation = function (): ReactElement {
             </>
           ) : (
             <>
-              <NavLink to="/">Home</NavLink>
               <NavLink to="/login">Login</NavLink>
             </>
           )}

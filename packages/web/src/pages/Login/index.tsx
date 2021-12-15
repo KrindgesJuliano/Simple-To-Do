@@ -1,5 +1,5 @@
 import { FormEvent, ReactElement, useEffect, useState } from 'react'
-import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthProvider/useAuth'
 
 // eslint-disable-next-line import/no-absolute-path
@@ -7,12 +7,12 @@ import martinelloImg from '/martinello.jpg'
 
 export function Login(): ReactElement {
   const navigate = useNavigate()
-  const location = useLocation()
+  // const location = useLocation()
   const auth = useAuth()
   const [name, setUsername] = useState('')
   const [email, setEmail] = useState('')
 
-  const from = location.state?.from?.pathname || '/'
+  // const from = location.state?.from?.pathname || '/'
 
   useEffect(() => {
     if (auth.email) {
@@ -31,8 +31,8 @@ export function Login(): ReactElement {
     }
   }
   return (
-    <div className="mx-auto h-[86vh] grid grid-cols-2">
-      <div className="bg-red-200 h-full">
+    <div className="mx-auto h-[85vh] flex justify-center sm:grid grid-cols-2">
+      <div className="bg-red-200 h-full hidden sm:block">
         <img
           src={martinelloImg}
           alt="imagem aerea da matriz"
@@ -42,7 +42,7 @@ export function Login(): ReactElement {
       <div className="flex justify-center items-center flex-col">
         <form
           onSubmit={onSubmitForm}
-          className="h-auto p-4 grid grid-rows-3 gap-4 w-[50%]"
+          className="h-auto p-4 grid grid-rows-3 gap-4 sm:w-[80%] lg:w-[50%]"
         >
           <div className="w-full">
             <label htmlFor="username" className="font-bold">

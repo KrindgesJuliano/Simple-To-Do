@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 import { FormEvent, ReactElement, useState } from 'react'
 // import { useNavigate } from 'react-router-dom'
 
@@ -18,9 +19,6 @@ export function SingUp(): ReactElement {
     status: 0
   })
   // const navigate = useNavigate()
-
-  console.log(response)
-
   async function onSubmitForm(event: FormEvent) {
     event.preventDefault()
 
@@ -40,8 +38,8 @@ export function SingUp(): ReactElement {
   }
   return (
     <>
-      <div className="mx-auto h-[86vh] grid grid-cols-2">
-        <div className="bg-red-200 h-full">
+      <div className="mx-auto h-[85vh] flex justify-center sm:grid grid-cols-2">
+        <div className="bg-red-200 h-full hidden sm:block">
           <img
             src={martinelloImg}
             alt="imagem aerea da matriz"
@@ -58,7 +56,7 @@ export function SingUp(): ReactElement {
 
           <form
             onSubmit={onSubmitForm}
-            className="h-auto p-4 grid grid-rows-3 gap-4 w-[50%]"
+            className="h-auto p-4 grid grid-rows-3 gap-4 sm:w-[80%] lg:w-[50%]"
           >
             <div className="w-full">
               <label htmlFor="username" className="font-bold">
