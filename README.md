@@ -1,7 +1,7 @@
 # App TO-DO Martinello
 
 ## Ambiente de desenvolvimento
-
+o ambiente foi configura como monorepo usando o yarn workspace então recomendo usar o yarn para gerenciar as dependencis e scripts
 ## Tech Stack
 
 **Client:**
