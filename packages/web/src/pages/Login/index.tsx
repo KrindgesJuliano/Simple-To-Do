@@ -1,58 +1,90 @@
-import { FormEvent, ReactElement, useState } from 'react'
+import { FormEvent, ReactElement, useEffect, useState } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthProvider/useAuth'
+
+// eslint-disable-next-line import/no-absolute-path
+import martinelloImg from '/martinello.jpg'
 
 export function Login(): ReactElement {
   const navigate = useNavigate()
   const location = useLocation()
   const auth = useAuth()
-  const [username, setUsername] = useState('')
+  const [name, setUsername] = useState('')
   const [email, setEmail] = useState('')
 
   const from = location.state?.from?.pathname || '/'
+
+  useEffect(() => {
+    if (auth.email) {
+      navigate('../todo', { replace: true })
+    }
+  }, [])
 
   async function onSubmitForm(event: FormEvent) {
     event.preventDefault()
 
     try {
-      await auth.authenticate(email, username)
-
-      navigate(from, { replace: true })
+      await auth.authenticate(email, name)
+      navigate('../todo', { replace: true })
     } catch (error) {
       console.log('Invalid email or username')
     }
   }
   return (
-    <div className=" mx-auto h-[50rem] grid grid-cols-2">
-      <div className="bg-red-200">
-        <h1>Para continuar crie uma conta</h1>
+    <div className="mx-auto h-[86vh] grid grid-cols-2">
+      <div className="bg-red-200 h-full">
+        <img
+          src={martinelloImg}
+          alt="imagem aerea da matriz"
+          className="object-cover h-full"
+        />
       </div>
-      <div className="flex justify-center items-center ">
-        <div className="w-1/2 h-auto p-4 flex gap-3 flex-col">
-          <form onSubmit={onSubmitForm}>
-            <label htmlFor="username">Nome</label>
+      <div className="flex justify-center items-center flex-col">
+        <form
+          onSubmit={onSubmitForm}
+          className="h-auto p-4 grid grid-rows-3 gap-4 w-[50%]"
+        >
+          <div className="w-full">
+            <label htmlFor="username" className="font-bold">
+              Nome
+            </label>
+            <br />
             <input
               type="text"
               name="username"
               id="username"
-              value={username}
+              value={name}
               onChange={event => setUsername(event.target.value)}
-              className="h-10"
+              className="h-10 w-full border-[1px] rounded"
             />
-            <label htmlFor="email">email</label>
+          </div>
+          <div>
+            <label htmlFor="email" className="font-bold">
+              E-mail
+            </label>
+            <br />
             <input
               type="email"
               name="email"
               id="email"
               value={email}
               onChange={event => setEmail(event.target.value)}
-              className="h-10"
+              className="h-10 w-full border-[1px] rounded"
             />
-            <button type="submit">Logar</button>
-          </form>
-          <p>ou</p>
-          <NavLink to="/signup">Criar Conta</NavLink>
-        </div>
+          </div>
+          <div>
+            <button
+              type="submit"
+              className="h-10 w-full bg-secondary font-bold text-white rounded"
+            >
+              Entrar
+            </button>
+          </div>
+        </form>
+        <p>ou</p>
+        <NavLink to="/signup" className="text-lg font-semibold">
+          Criar Conta
+        </NavLink>
       </div>
     </div>
   )

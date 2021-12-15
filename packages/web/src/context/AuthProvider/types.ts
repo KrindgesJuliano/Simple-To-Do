@@ -1,10 +1,12 @@
 export interface IUser {
-  email: string | null | undefined
-  username: string | null | undefined
+  email: string
+  name: string
+  id: string
+  tasks?: []
 }
 
 export interface IContext extends IUser {
-  authenticate: (email: string, username: string) => Promise<void>
+  authenticate: (email: string, name: string) => Promise<void>
   logout: () => void
 }
 export interface IAuthProvider {

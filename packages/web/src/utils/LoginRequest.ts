@@ -1,11 +1,10 @@
 import { api } from '../services/api'
 
-export async function LoginRequest(email: string, username: string) {
+export async function LoginRequest(email: string, name: string) {
   try {
-    const request = await api.post('user', { email, username })
-
+    const request = await api.post('/login', { email, name })
     return request.data
   } catch (error) {
-    return null
+    console.log(error)
   }
 }

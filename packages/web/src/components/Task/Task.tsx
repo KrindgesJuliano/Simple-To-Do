@@ -1,8 +1,9 @@
 import { FormEvent, ReactElement, useEffect, useState } from 'react'
-import { FiCheck, FiTrash2 } from 'react-icons/fi'
+import { FiCheck, FiTrash2, FiEdit3 } from 'react-icons/fi'
 import { AiOutlineClose } from 'react-icons/ai'
 
 import { api } from '../../services/api'
+import { useAuth } from '../../context/AuthProvider/useAuth'
 
 interface Props {
   id: string
@@ -26,6 +27,8 @@ const checkMark = (
 )
 
 export default function Task({ id, title, checked }: Props): ReactElement {
+  const auth = useAuth()
+
   const [isChecked, setIsChecked] = useState(false)
   const [isEditable, setIsEditable] = useState(false)
   const [newTitle, setNewTitle] = useState('')
@@ -37,11 +40,11 @@ export default function Task({ id, title, checked }: Props): ReactElement {
       title: newTitle,
       checked: !isChecked,
       id: id,
-      userId: 'ds'
+      userId: auth.id
     })
   }
 
-  function handleDoubleClick() {
+  function handleEditField() {
     setIsEditable(prevState => !prevState)
   }
 
@@ -57,7 +60,7 @@ export default function Task({ id, title, checked }: Props): ReactElement {
       title: newTitle,
       checked: isChecked,
       id: id,
-      userId: 'ds'
+      userId: auth.id
     })
   }
 
@@ -94,8 +97,8 @@ export default function Task({ id, title, checked }: Props): ReactElement {
 
   return (
     <div
-      onDoubleClick={handleDoubleClick}
-      className="flex justify-between border-[2px] border-slate-300 m-1 rounded h-10"
+      onDoubleClick={handleEditField}
+      className="flex justify-between border-[1px] border-slate-300 m-1 rounded h-10"
     >
       <div className="flex items-center gap-2 w-[97%] pl-3 ">
         <input
@@ -110,6 +113,18 @@ export default function Task({ id, title, checked }: Props): ReactElement {
         </div>
 
         {isEditable ? EditeInput() : <p className="py-1 w-auto">{newTitle}</p>}
+      </div>
+      <div className="hover:bg-slate-300 group px-3">
+        <button
+          type="button"
+          className="h-full w-full"
+          onClick={handleEditField}
+        >
+          <FiEdit3
+            size={22}
+            className="group-hover:text-blue-600 text-blue-400"
+          />
+        </button>
       </div>
       <div className="hover:bg-slate-300 group px-3">
         <button

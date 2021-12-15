@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { LoginRequest } from '../../utils/LoginRequest'
 import { getUserLocalStorage, setUserLocalStorage } from '../../utils/storage'
 
@@ -17,10 +17,11 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
     }
   }, [])
 
-  async function authenticate(email: string, username: string) {
-    const response = await LoginRequest(email, username)
+  async function authenticate(email: string, name: string) {
+    console.log(email, name)
+    const response = await LoginRequest(email, name)
 
-    const payload = { token: response.token, email, username }
+    const payload = { token: response.token, email, name, id: response.id }
 
     setUser(payload)
     setUserLocalStorage(payload)
@@ -31,9 +32,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
     setUserLocalStorage(null)
   }
 
-  return (
-    <AuthContext.Provider value={{ ...user, authenticate, logout }}>
-      {children}
-    </AuthContext.Provider>
-  )
+  const value = { ...user, authenticate, logout }
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
